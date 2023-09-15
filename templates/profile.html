@@ -1,0 +1,277 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+	<title>Friends | Profile - {{user_profile.user.username}}</title>
+   	<!-- <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16"> -->
+    
+    <link rel="stylesheet" href="{% static 'css/main.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/color.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+
+	<link href="{% static 'favicon.png' %}" rel="icon" type="image/png">
+	<link rel="stylesheet" href="{% static 'assets/css/icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/uikit.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+	<style>
+		.profile-image {
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			overflow: hidden;
+		}
+	
+		.profile-image img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+		.align-right {
+		margin-left: auto;
+		}
+		
+
+	</style>
+	
+	
+</head>
+<body>	
+
+
+	<header style="background-color: aliceblue">
+		<div class="header_inner flex items-center">
+			<div id="logo" class="uk-visible@">
+				<a href="/">
+					<img src="{% static '/images/logo-3.png' %}" alt="Logo" class="header-logo">
+				</a>
+			</div>
+	
+			<div id="logo" class="uk-visible@">
+				<a href="/">
+					<b><h1 style="font-size: 1.5rem;">Friends</h1></b>
+				</a>
+			</div>
+	
+			<div class="right-side lg:pr-4 flex items-center ml-auto">
+				<a href="/settings" class="mr-2">
+					Welcome <b name="" class="">{{ user.username }}</b>
+				</a>
+				<div class="profile-image align-right ml-2">
+					<a href="#">
+						<img src="{{ owner_profile.profileimg.url }}" class="header-avatar" alt="">
+					</a>
+				</div>
+	
+				<div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t" style="background-color:aliceblue;">
+					<ul>
+						<li><a href="/settings">Profile settings</a></li>
+						<li><a href="/logout">Log Out</a></li>
+					</ul>
+				</div>
+	
+				
+			</div>
+		</div>
+	</header>
+
+
+
+<div class="theme-layout">
+	
+	</div>
+	
+	<section>
+			<div class="feature-photo">
+				<figure><img src="{% static 'images/resources/timeline-1.jpg' %}" alt=""></figure>
+				<form action="/follow" method="POST" >
+					{% csrf_token %}
+					<div class="add-btn flex items-center">
+    <!-- <span style="color: white; font-size: 27px; margin-right: 520px;"><b><u><a href="/">Home</a></u></b></span> -->
+
+    {% if user_posts_length == 0 %}
+        <span style="color: white; font-size: 27px;"><b>No Post</b></span>
+    {% elif user_posts_length == 1 %}	
+        <span style="color: white; font-size: 27px;"><b>{{ user_posts_length }} Post</b></span>
+    {% else %}
+        <span style="color: white; font-size: 27px;"><b>{{ user_posts_length }} Posts</b></span>
+    {% endif %}
+
+    {% if user_followers == 0 or user_followers == 1 %}
+        <span style="color: white; font-size: 27px;"><b>{{user_followers}} follower</b></span>
+    {% else %}
+        <span style="color: white; font-size: 27px;"><b>{{user_followers}} followers</b></span>
+    {% endif %}
+
+    <span style="color: white; font-size: 27px;"><b>{{user_following}} following</b></span>
+
+    <div style="margin-left: 20px;"></div> <!-- Add this line for spacing -->
+
+    <input type="hidden" value="{{ user.username }}" name="follower" />
+    <input type="hidden" value="{{ user_object.username }}" name="user" />
+    
+    <a href="{% url 'chat' receiver_id=user_profile.user.id %}" title="" style="margin: 10px;" data-ripple="">
+        <img src="{% static 'images/chat_icon.png' %}" alt="Chat" style="width: 30px; height: 30px;">
+    </a>
+
+    {% if user_object.username == user.username %}
+        <a href="/settings" title="" data-ripple="">Profile Settings</a>
+    {% else %}
+        <a href="" title="" data-ripple=""><button type="submit" style="background-color: #ffc0cb; border: #ffc0cb;">{{button_text}}</button></a>
+    {% endif %}
+</div>
+
+				</form>
+
+				
+				<div class="container-fluid">
+					<div class="row merged">
+						<div class="col-lg-2 col-sm-3">
+							<div class="user-avatar">
+								<figure>
+									<img src="{{ user_profile.profileimg.url }}" style="height: 250px; width: 100%;" alt="">
+								</figure>
+							</div>
+						</div>
+						<div class="col-lg-10 col-sm-9">
+							<div class="timeline-info">
+								<ul>
+									<li class="admin-name">
+									  <h4 style="color: rgb(0, 0, 0);white-space: nowrap; width: 110px; font-size: 27px;"><b>{{user_profile.user.username}}</b><!--<i class="fa fa-check-circle" style="color: #48dbfb;" aria-hidden="true"></i>--></h5>
+									  <!--<span>Group Admin</span>-->
+										<p>{{user_profile.bio}}</p>
+										<!-- <a href="{% url 'chat' receiver_id=user_profile.user.id %}">Chat</a> -->
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section><!-- top area -->
+		
+	<section>
+		<div class="gap gray-bg">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="row" id="page-contents">
+							<div class="col-lg-3">
+								<aside class="sidebar static">
+					
+								</aside>
+							</div><!-- sidebar -->
+
+							<div class="col-lg-6">
+								<div class="central-meta"> 
+									<ul class="photos">
+										{% for post in user_posts %}
+										<li>
+											<a class="strip" href="{{post.image.url}}" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
+												<img src="{{post.image.url}}" style="height: 250px; width: 300px;" alt=""></a>
+										</li>
+										{% endfor %}
+										
+										
+										
+									</ul>
+								</div><!-- photos -->
+							</div><!-- centerl meta -->
+							<div class="col-lg-3">
+								<aside class="sidebar static">
+									
+								</aside>
+							</div><!-- sidebar -->
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>	
+	</section>
+
+
+	<footer class="lg:mb-5 py-3 uk-link-reset">
+		<div class="flex flex-col items-center justify-between lg:flex-row max-w-6xl mx-auto lg:space-y-0 space-y-3">
+		  <div class="flex space-x-2 text-gray-700 uppercase">
+			<a href="#" class="footer-link">About</a>
+			<a href="#" class="footer-link">Help</a>
+			<a href="#" class="footer-link">Terms</a>
+			<a href="#" class="footer-link">Privacy</a>
+		  </div>
+
+		  <div class="flex space-x-8 lg:order-first">
+			<a href="{% url 'blog' %}" class="mt-4 bg-pink-500 text-white font-semibold py-2 px-4 rounded hover:bg-pink-600 transition-colors duration-300 self-start">Our Blog👽</a>
+		  </div>
+		
+		</div>
+	  </footer>
+	  <style>
+		/* Add the following CSS to your existing styles.css or style.css file */
+		.footer-link {
+		  color: #888;
+		  font-size: 14px;
+		  text-decoration: none;
+		  transition: color 0.3s ease;
+		}
+	  
+		.footer-link:hover {
+		  color: #555;
+		}
+	  
+		footer {
+		  background-color: #f9f9f9;
+		}
+	  
+		footer h2 {
+		  font-size: 20px;
+		  font-weight: bold;
+		}
+	  
+		footer a {
+		  display: inline-block;
+		  background-color: #ff6b6b;
+		  color: #fff;
+		  font-weight: bold;
+		  font-size: 14px;
+		  padding: 8px 16px;
+		  border-radius: 4px;
+		  transition: background-color 0.3s ease, color 0.3s ease;
+		  text-decoration: none;
+		}
+	  
+		footer a:hover {
+		  background-color: #ff4f4f;
+		}
+	  </style>
+	  
+	
+
+	
+	<script data-cfasync="false" src="{% static '../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js' %}"></script><script src="{%static 'js/main.min.js' %}"></script>
+	<script src="{% static 'js/script.js' %}"></script>
+
+	<script src="{% static 'assets/js/tippy.all.min.js' %}"></script>  
+    <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/uikit.js' %}"></script>
+    <script src="{% static 'assets/js/simplebar.js' %}"></script>
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+
+
+    <script src="{% static '../../unpkg.com/ionicons%405.2.3/dist/ionicons.js' %}"></script>
+
+</body>	
+
+
+</html>

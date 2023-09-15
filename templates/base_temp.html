@@ -1,0 +1,75 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'favicon.png' %}" rel="icon" type="image/png">
+    <title>Friends | blog</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'assets/css/icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/uikit.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+    <header>
+        <div class="header_inner flex items-center">
+            <div id="logo" class="uk-visible@">
+                <a href="/">
+                    <img src="{% static '/images/logo-3.png' %}" alt="Logo" class="header-logo">
+                </a>
+            </div>
+
+            <div id="logo" class="uk-visible@">
+                <a href="/">
+                    <b><h1 style="font-size: 1.5rem " >Friends</h1></b>
+                </a>
+            </div>&nbsp; &nbsp; 
+
+            <div class="right-side lg:pr-4">
+
+                <a href="/settings" class="">
+                    Welcome <b name="" class="">{{user.username}}&nbsp; &nbsp; &nbsp;</b>
+                </a>
+
+
+                <a href="#">
+                    <img src="{{ user_profile.profileimg.url }}" class="header-avatar" alt="">
+                </a>
+                <div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t">
+                    <ul>
+                        <li><a href="/settings"> Profile settings </a> </li>
+                        <li><a href="logout"> Log Out</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </header>
+            
+
+            
+
+ <!-- Scripts
+    ================================================== -->
+    <script src="{% static 'assets/js/tippy.all.min.js' %}"></script>  
+    <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/uikit.js' %}"></script>
+    <script src="{% static 'assets/js/simplebar.js' %}"></script>
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+
+
+    <script src="{% static '../../unpkg.com/ionicons%405.2.3/dist/ionicons.js' %}"></script>
+</body>
+
+
+</html>

@@ -1,0 +1,207 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'favicon.png' %}" rel="icon" type="image/png">
+    <title>Friends | Inbox</title>
+    <link rel="stylesheet" href="{% static 'assets/css/uikit.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+
+        .conversation {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #333;
+            transition: background-color 0.3s ease;
+        }
+
+        .conversation:hover {
+            background-color: #f5f5f5;
+        }
+
+        .conversation h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .conversation p {
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+        .conversation img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .conversation-box {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .conversation-box img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .conversation-box .content {
+            flex-grow: 1;
+        }
+
+        .conversation-box .username {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .conversation-box .message {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .conversation-box .timestamp {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .text-center {
+            font-size: 40px;
+            margin-bottom: 20px;
+            text-align: center;
+            padding-top: 20px;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header_inner flex items-center">
+            <div id="logo" class="uk-visible@">
+                <a href="/">
+                    <img src="{% static '/images/logo-3.png' %}" alt="Logo" class="header-logo">
+                </a>
+            </div>
+
+            <div id="logo" class="uk-visible@">
+                <a href="/">
+                    <h1 class="text-3xl">Friends</h1>
+                </a>
+            </div>
+            <div class="right-side lg:pr-4">
+                <a href="/settings" class="">
+                    Welcome <b name="" class="">{{ user.username }}&nbsp; &nbsp; &nbsp;</b>
+                </a>
+                <a href="#">
+                    <img src="{{ user_profile.profileimg.url }}" class="header-avatar" alt="">
+                </a>
+                <div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t">
+                    <ul>
+                        <li><a href="/settings">Profile settings</a></li>
+                        <li><a href="logout">Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <h1 class="text-center">Inbox</h1>
+    {% for conversation in conversations %}
+    <a href="{% url 'chat' receiver_id=conversation.0.id %}" class="conversation-box">
+        <img src="{{ conversation.0.profile.profileimg.url }}" alt="Profile Image">
+        <div class="content">
+            <div class="username">{{ conversation.0.username }}</div>
+            <div class="message">{{ conversation.1.content }}</div>
+            <div class="timestamp">{{ conversation.1.timestamp }}</div>
+        </div>
+    </a>
+    {% endfor %}
+
+    <footer class="lg:mb-5 py-3 uk-link-reset">
+		<div class="flex flex-col items-center justify-between lg:flex-row max-w-6xl mx-auto lg:space-y-0 space-y-3">
+		  <div class="flex space-x-2 text-gray-700 uppercase">
+			<a href="#" class="footer-link">About</a>
+			<a href="#" class="footer-link">Help</a>
+			<a href="#" class="footer-link">Terms</a>
+			<a href="#" class="footer-link">Privacy</a>
+		  </div>
+
+		  <div class="flex space-x-8 lg:order-first">
+			<a href="{% url 'blog' %}" class="mt-4 bg-pink-500 text-white font-semibold py-2 px-4 rounded hover:bg-pink-600 transition-colors duration-300 self-start">Our Blog👽</a>
+		  </div>
+		
+		</div>
+	  </footer>
+	  <style>
+		/* Add the following CSS to your existing styles.css or style.css file */
+		.footer-link {
+		  color: #888;
+		  font-size: 14px;
+		  text-decoration: none;
+		  transition: color 0.3s ease;
+		}
+	  
+		.footer-link:hover {
+		  color: #555;
+		}
+	  
+		footer {
+		  background-color: #f9f9f9;
+		}
+	  
+		footer h2 {
+		  font-size: 20px;
+		  font-weight: bold;
+		}
+	  
+		footer a {
+		  display: inline-block;
+		  background-color: #ff6b6b;
+		  color: #fff;
+		  font-weight: bold;
+		  font-size: 14px;
+		  padding: 8px 16px;
+		  border-radius: 4px;
+		  transition: background-color 0.3s ease, color 0.3s ease;
+		  text-decoration: none;
+		}
+	  
+		footer a:hover {
+		  background-color: #ff6b6b;
+		}
+	  </style>
+
+    <script src="{% static 'assets/js/tippy.all.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/uikit.js' %}"></script>
+    <script src="{% static 'assets/js/simplebar.js' %}"></script>
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+    <script src="{% static '../../unpkg.com/ionicons%405.2.3/dist/ionicons.js' %}"></script>
+</body>
+
+</html>

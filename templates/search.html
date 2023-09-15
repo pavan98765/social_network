@@ -1,0 +1,281 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="favicon.png" rel="icon" type="image/png">
+    <title>Friends | Search</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'assets/css/icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/uikit.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+</head>
+
+<body>
+    <header style="padding: 10px; margin-top: -20px;">
+        <div class="header_inner flex items-center">
+            <div id="logo" class="uk-visible@">
+                <a href="/">
+                    <img src="{% static '/images/logo-3.png' %}" alt="Logo" class="header-logo">
+                </a>
+            </div>
+
+            <div id="logo" class="uk-visible@">
+                <a href="/">
+                    <b><h1 style="font-size: 1.5rem " >Friends</h1></b>
+                </a>
+            </div>&nbsp; &nbsp; 
+
+
+
+            <form action="search" method="POST">
+                {% csrf_token %}
+            <div class="left-side">
+            
+                <input type="text" name="username" placeholder="Search for username..">&nbsp; &nbsp; 
+                <button type="submit"><i class="fa fa-search fa-1x"></i></button>
+
+            </div>
+            </form>
+
+            <div class="right-side lg:pr-4">
+
+                <a href="/settings" class="">
+                    Welcome <b name="" class="">{{user.username}}&nbsp; &nbsp; &nbsp;</b>
+                </a>
+
+                <a href="#">
+                    <img src="{{ user_profile.profileimg.url }}" class="header-avatar" alt="">
+                </a>
+                <div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t">
+                    <ul>
+                        <li><a href="/settings"> Profile setting </a> </li>
+                        <li><a href="logout"> Log Out</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </header>
+            
+            <div style="margin-left: 250px; margin-right: 250px;">
+                
+                <style>
+                body{margin-top:20px;
+                background-color: #eee;
+                }
+
+                .search-result-categories>li>a {
+                    color: #b6b6b6;
+                    font-weight: 400
+                }
+
+                .search-result-categories>li>a:hover {
+                    background-color: #ddd;
+                    color: #555
+                }
+
+                .search-result-categories>li>a>.glyphicon {
+                    margin-right: 5px
+                }
+
+                .search-result-categories>li>a>.badge {
+                    float: right
+                }
+
+                .search-results-count {
+                    margin-top: 10px
+                }
+
+                .search-result-item {
+                    padding: 20px;
+                    background-color: #fff;
+                    border-radius: 4px
+                }
+
+                .search-result-item:after,
+                .search-result-item:before {
+                    content: " ";
+                    display: table
+                }
+
+                .search-result-item:after {
+                    clear: both
+                }
+
+                .search-result-item .image-link {
+                    display: block;
+                    overflow: hidden;
+                    border-top-left-radius: 4px;
+                    border-bottom-left-radius: 4px
+                }
+
+                @media (min-width:768px) {
+                    .search-result-item .image-link {
+                        display: inline-block;
+                        margin: -20px 0 -20px -20px;
+                        float: left;
+                        width: 200px
+                    }
+                }
+
+                @media (max-width:767px) {
+                    .search-result-item .image-link {
+                        max-height: 200px
+                    }
+                }
+
+                .search-result-item .image {
+                    max-width: 100%
+                }
+
+                .search-result-item .info {
+                    margin-top: 2px;
+                    font-size: 12px;
+                    color: #999
+                }
+
+                .search-result-item .description {
+                    font-size: 13px
+                }
+
+                .search-result-item+.search-result-item {
+                    margin-top: 20px
+                }
+
+                @media (min-width:768px) {
+                    .search-result-item-body {
+                        margin-left: 200px
+                    }
+                }
+
+                .search-result-item-heading {
+                    font-weight: 400
+                }
+
+                .search-result-item-heading>a {
+                    color: #555
+                }
+
+                @media (min-width:768px) {
+                    .search-result-item-heading {
+                        margin: 0
+                    }
+                }
+                </style>
+
+                <div class="container">
+                <div class="row ng-scope">
+                    <div class="col-md-3 col-md-push-9">
+                        <h4 style="font-size: 1.2em;">Results🙅:<span class="fw-semi-bold"><b>{{username}}</b></span></h4>
+                        <br>
+                        
+                    </div>
+                    <div class="col-md-9 col-md-pull-3">
+                        <!-- <p class="search-results-count">About 94 700 000 (0.39 sec.) results</p> -->
+                        
+                        {% for users in username_profile_list %}
+                        <section class="search-result-item">
+                            <a class="image-link" href="/profile/{{users.user}}"><img class="image" src="{{users.profileimg.url}}">
+                            </a>
+                            <div class="search-result-item-body">
+                                <div class="row">
+                                    <div class="col-sm-9">
+                                        <h4 class="search-result-item-heading"><a href="/profile/{{users.user}}"><b>@{{users.user}}</b></a></h4><br>
+                                        <p class="description">Bio : {{users.bio}}</p>
+                                        <p class="info">From : {{users.location}}</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </section>
+                        {% endfor %}
+                        
+                        
+                    </div>
+                </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div><br>
+
+    <footer class="lg:mb-5 py-3 uk-link-reset">
+		<div class="flex flex-col items-center justify-between lg:flex-row max-w-6xl mx-auto lg:space-y-0 space-y-3">
+		  <div class="flex space-x-2 text-gray-700 uppercase">
+			<a href="#" class="footer-link">About</a>
+			<a href="#" class="footer-link">Help</a>
+			<a href="#" class="footer-link">Terms</a>
+			<a href="#" class="footer-link">Privacy</a>
+		  </div>
+
+		  <div class="flex space-x-8 lg:order-first">
+			<a href="{% url 'blog' %}" class="mt-4 bg-pink-500 text-white font-semibold py-2 px-4 rounded hover:bg-pink-600 transition-colors duration-300 self-start">Our Blog👽</a>
+		  </div>
+		
+		</div>
+	  </footer>
+	  <style>
+		/* Add the following CSS to your existing styles.css or style.css file */
+		.footer-link {
+		  color: #888;
+		  font-size: 14px;
+		  text-decoration: none;
+		  transition: color 0.3s ease;
+		}
+	  
+		.footer-link:hover {
+		  color: #555;
+		}
+	  
+		footer {
+		  background-color: #f9f9f9;
+		}
+	  
+		footer h2 {
+		  font-size: 20px;
+		  font-weight: bold;
+		}
+	  
+		footer a {
+		  display: inline-block;
+		  background-color: #ff6b6b;
+		  color: #fff;
+		  font-weight: bold;
+		  font-size: 14px;
+		  padding: 8px 16px;
+		  border-radius: 4px;
+		  transition: background-color 0.3s ease, color 0.3s ease;
+		  text-decoration: none;
+		}
+	  
+		footer a:hover {
+		  background-color: #ff6b6b;
+		}
+	  </style>
+
+
+
+ <!-- Scripts
+    ================================================== -->
+    <script src="{% static 'assets/js/tippy.all.min.js' %}"></script>  
+    <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/uikit.js' %}"></script>
+    <script src="{% static 'assets/js/simplebar.js' %}"></script>
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+
+
+    <script src="{% static '../../unpkg.com/ionicons%405.2.3/dist/ionicons.js' %}"></script>
+</body>
+
+
+</html>

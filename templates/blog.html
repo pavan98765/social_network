@@ -1,0 +1,237 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'favicon.png' %}" rel="icon" type="image/png">
+    <title>Friends | blog</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'assets/css/icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/uikit.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- youtbe iframe link -->
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
+    <script src="https://cdn.plyr.io/3.6.2/plyr.js"></script>
+    <style>
+        /* Custom styles */
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            
+        }
+        .container {
+            margin-bottom: 40px;
+            margin-top: 40px;
+            background-color: rgb(255, 255, 255);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 2px 20px rgba(231, 13, 13, 0.882);
+            text-align: center;
+            /* i want the containers in the center of the page */
+            margin-left: auto;
+            margin-right: auto;
+            /* suggest a eye catchy font */
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            /* add some good styles for better reading experience */
+            color:gray;
+            font-size: 60px;
+            line-height: 1.6;
+            letter-spacing: 1px;
+            
+        }
+     /*i want the p tags to have a bigger font  */
+        .container p {
+            font-size: 25px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        /* make the iframe responsive */
+        iframe {
+            width: 100%;
+            height: 315px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 4px;
+        }
+    
+        /* Responsive styles */
+    
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 20px;
+            }
+    
+            p {
+                font-size: 14px;
+            }
+    
+            iframe {
+                height: 200px;
+            }
+        }
+    
+        /* Additional styles */
+    
+        /* Add your additional styles here */
+    </style>
+    
+    
+</head>
+
+<body>
+
+    <header>
+        <div class="header_inner flex items-center">
+            <div id="logo" class="uk-visible@">
+                <a href="/">
+                    <img src="{% static '/images/logo-3.png' %}" alt="Logo" class="header-logo">
+                </a>
+            </div>
+
+            <div id="logo" class="uk-visible@">
+                <a href="/">
+                    <b><h1 style="font-size: 1.5rem " >Friends Blog</h1></b>
+                </a>
+            </div>&nbsp; &nbsp; 
+
+            <div class="right-side lg:pr-4">
+
+                <a href="/settings" class="">
+                    Welcome <b name="" class="">{{user.username}}&nbsp; &nbsp; &nbsp;</b>
+                </a>
+
+
+                <a href="#">
+                    <img src="{{ user_profile.profileimg.url }}" class="header-avatar" alt="">
+                </a>
+                <div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t">
+                    <ul>
+                        <li><a href="/settings"> Profile setting </a> </li>
+                        <li><a href="logout"> Log Out</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </header>
+       
+    <div class="container book">
+        <h1>ATOMIC HABITS</h1>
+        <p>
+            "Atomic Habits" by James Clear is a transformative book that provides practical strategies for building and breaking habits. The core idea is that small changes, when consistently applied, can lead to remarkable results.
+        </p>
+        <p>
+            Clear introduces the concept of atomic habits, which are tiny, fundamental behaviors that shape our daily lives. He emphasizes the importance of focusing on the process of habit formation rather than solely fixating on goals. By making small, incremental improvements and building positive habits, individuals can achieve long-term success.
+        </p>
+        <p>    
+            The book highlights the power of the "2-Minute Rule," which suggests starting with habits that take no more than two minutes to complete. This approach lowers the barrier to entry, making it easier to initiate and sustain new habits. Over time, these small actions compound and become the building blocks for significant personal and professional growth.
+        </p>
+        <p>    
+            Clear also explores the concept of the "Goldilocks Zone," where habits are challenging enough to be engaging and rewarding but not so difficult as to be overwhelming. Finding the right balance ensures that habits remain sustainable and enjoyable, increasing the likelihood of long-term adherence.
+        </p>
+        <p>   
+            Throughout the book, Clear provides practical strategies for habit formation, habit stacking, and habit tracking. He discusses the importance of environment design and how small changes to our surroundings can have a profound impact on our behaviors.
+        </p>
+        <p>    
+            "Atomic Habits" encourages readers to focus on the power of small steps and marginal gains. By consistently implementing tiny, positive changes in our daily routines, we can gradually transform our lives. Clear's insights and actionable advice make this book a valuable resource for anyone seeking to create lasting change and achieve their goals.
+        </p>
+        
+        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/s9uDVVWN_ZE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        
+    </div>
+    
+    <div class="container book">
+        <h1>The  Subtle  art  of  not  giving  a  F*ck</h1>
+        <p>
+            "The Subtle Art of Not Giving a F*ck" by Mark Manson is a self-help book that offers a unique perspective on finding happiness and living a meaningful life. The central theme of the book is that we should prioritize what truly matters to us and let go of the things that don't.
+        </p>
+        <p>
+            Manson challenges conventional wisdom and encourages readers to embrace discomfort, accept their limitations, and take responsibility for their own lives. He argues that happiness comes from focusing on our values and choosing what we care about, rather than seeking constant validation and avoiding negative experiences.
+        </p>
+        <p>    
+            The book emphasizes the importance of accepting our flaws and imperfections, as well as embracing failure and rejection as opportunities for growth. Manson advocates for setting realistic expectations, letting go of societal pressures, and being honest with ourselves and others.
+        </p>
+        <p>    
+            Through humorous anecdotes, practical advice, and thought-provoking insights, Manson explores various topics such as self-awareness, relationships, success, and death. He encourages readers to develop a healthy mindset, challenge their beliefs, and create a life that aligns with their true values.
+        </p>
+        <p>    
+            Overall, "The Subtle Art of Not Giving a F*ck" provides a counterintuitive approach to personal development, urging readers to prioritize what truly matters and find meaning in life by letting go of unnecessary burdens and focusing on what brings genuine fulfillment.
+        </p>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/lz8sUiXAnbs" frameborder="0" allowfullscreen></iframe>
+        
+    </div>
+
+    <footer class="lg:mb-5 py-3 uk-link-reset">
+		<div class="flex flex-col items-center justify-between lg:flex-row max-w-6xl mx-auto lg:space-y-0 space-y-3">
+		  <div class="flex space-x-2 text-gray-700 uppercase">
+			<a href="#" class="footer-link">About</a>
+			<a href="#" class="footer-link">Help</a>
+			<a href="#" class="footer-link">Terms</a>
+			<a href="#" class="footer-link">Privacy</a>
+		  </div>
+
+		  <div class="flex space-x-8 lg:order-first">
+			<a href="{% url 'index' %}" class="mt-4 bg-pink-500 text-white font-semibold py-2 px-4 rounded hover:bg-pink-600 transition-colors duration-300 self-start">Our Home👽</a>
+		  </div>
+		
+		</div>
+
+	  </footer>
+	  <style>
+		/* Add the following CSS to your existing styles.css or style.css file */
+		.footer-link {
+		  color: #888;
+		  font-size: 14px;
+		  text-decoration: none;
+		  transition: color 0.3s ease;
+		}
+	  
+		.footer-link:hover {
+		  color: #555;
+		}
+	  
+		footer {
+		  background-color: #f9f9f9;
+		}
+	  
+		footer h2 {
+		  font-size: 20px;
+		  font-weight: bold;
+		}
+	  
+		footer a {
+		  display: inline-block;
+		  background-color: #ff6b6b;
+		  color: #fff;
+		  font-weight: bold;
+		  font-size: 14px;
+		  padding: 8px 16px;
+		  border-radius: 4px;
+		  transition: background-color 0.3s ease, color 0.3s ease;
+		  text-decoration: none;
+		}
+	  
+		footer a:hover {
+		  background-color: #ff6b6b;
+		}
+	  </style>
+</body>
+
+
+</html>
+
+    
+
+    
+ 
